@@ -64,13 +64,13 @@ char readData()
 void writeData(char value)
 {
   digitalWrite(DATA_0, value & 1);
-  digitalWrite(DATA_1, value & 2);
-  digitalWrite(DATA_2, value & 4);
-  digitalWrite(DATA_3, value & 8);
-  digitalWrite(DATA_4, value & 16);
-  digitalWrite(DATA_5, value & 32);
-  digitalWrite(DATA_6, value & 64);
-  digitalWrite(DATA_7, value & 128);
+  digitalWrite(DATA_1, (value & 2) >> 1);
+  digitalWrite(DATA_2, (value & 4) >> 2);
+  digitalWrite(DATA_3, (value & 8) >> 3);
+  digitalWrite(DATA_4, (value & 16) >> 4);
+  digitalWrite(DATA_5, (value & 32) >> 5);
+  digitalWrite(DATA_6, (value & 64) >> 6);
+  digitalWrite(DATA_7, (value & 128) >> 7);
 }
 
 void setAddress(short value)
