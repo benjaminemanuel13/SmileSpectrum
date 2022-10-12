@@ -1,35 +1,35 @@
-#define ADDR_1 6
-#define ADDR_2 7
-#define ADDR_3 8
-#define ADDR_4 9
-#define ADDR_5 10
-#define ADDR_6 11
-#define ADDR_7 12
-#define ADDR_8 13
-#define ADDR_9 14
-#define ADDR_10 15
-#define ADDR_11 16
-#define ADDR_12 17
-#define ADDR_13 18
-#define ADDR_14 19
-#define ADDR_15 20
-#define ADDR_16 21
+#define ADDR_1 2
+#define ADDR_2 3
+#define ADDR_3 4
+#define ADDR_4 5
+#define ADDR_5 6
+#define ADDR_6 7
+#define ADDR_7 8
+#define ADDR_8 9
+#define ADDR_9 10
+#define ADDR_10 11
+#define ADDR_11 12
+#define ADDR_12 13
+#define ADDR_13 22
+#define ADDR_14 24
+#define ADDR_15 26
+#define ADDR_16 28
 
-#define DATA_1 22
-#define DATA_2 23
-#define DATA_3 24
-#define DATA_4 25
-#define DATA_5 26
-#define DATA_6 27
-#define DATA_7 28
-#define DATA_8 29
+#define DATA_1 30
+#define DATA_2 32
+#define DATA_3 34
+#define DATA_4 36
+#define DATA_5 38
+#define DATA_6 40
+#define DATA_7 42
+#define DATA_8 44
 
-#define CLOCK 30
-#define IORQ 31
-#define MEMREQ 32
-#define RD 33
-#define WR 34
-#define WAIT 35
+#define CLOCK 31
+#define IORQ 33
+#define MEMREQ 35
+#define RD 37
+#define WR 39
+#define WAIT 41
 
 bool clockrun = false;
 bool clockvalue = false;
@@ -186,7 +186,9 @@ void runClock()
 {
   clockrun = true;
   clockvalue = digitalRead(CLOCK);
-
+  lowcount = 0;
+  highcount = 0;
+  
   if(clockvalue)
   {
     ignore = false;
@@ -212,8 +214,8 @@ void runClock()
       clockvalue = digitalRead(CLOCK);
     }
   
-    //Clock is now low after being high
-    //Clock Cycle
+    // Clock is now low after being high
+    // 1/2 Clock Cycle
   
     lowcount++;
     low();
@@ -223,8 +225,8 @@ void runClock()
       clockvalue = digitalRead(CLOCK);
     }
   
-    //Clock is now high after being low
-    //Clock Cycle
+    // Clock is now high after being low
+    // 1/2 Clock Cycle
   
     highcount++;
     high();
