@@ -76,21 +76,21 @@ void writeData(char value)
 void setAddress(short value)
 {
   digitalWrite(ADDR_0, value & 1);
-  digitalWrite(ADDR_1, value & 2);
-  digitalWrite(ADDR_2, value & 4);
-  digitalWrite(ADDR_3, value & 8);
-  digitalWrite(ADDR_4, value & 16);
-  digitalWrite(ADDR_5, value & 32);
-  digitalWrite(ADDR_6, value & 64);
-  digitalWrite(ADDR_7, value & 128);
-  digitalWrite(ADDR_8, value & 256);
-  digitalWrite(ADDR_9, value & 512);
-  digitalWrite(ADDR_10, value & 1024);
-  digitalWrite(ADDR_11, value & 2048);
-  digitalWrite(ADDR_12, value & 4096);
-  digitalWrite(ADDR_13, value & 8192);
-  digitalWrite(ADDR_14, value & 16384);
-  digitalWrite(ADDR_15, value & 32768);
+  digitalWrite(ADDR_1, (value & 2) >> 1);
+  digitalWrite(ADDR_2, (value & 4) >> 2);
+  digitalWrite(ADDR_3, (value & 8) >> 3);
+  digitalWrite(ADDR_4, (value & 16) >> 4);
+  digitalWrite(ADDR_5, (value & 32) >> 5);
+  digitalWrite(ADDR_6, (value & 64) >> 6);
+  digitalWrite(ADDR_7, (value & 128) >> 7);
+  digitalWrite(ADDR_8, (value & 256) >> 8);
+  digitalWrite(ADDR_9, (value & 512) >> 9);
+  digitalWrite(ADDR_10, (value & 1024) >> 10);
+  digitalWrite(ADDR_11, (value & 2048) >> 11);
+  digitalWrite(ADDR_12, (value & 4096) >> 12);
+  digitalWrite(ADDR_13, (value & 8192) >> 13);
+  digitalWrite(ADDR_14, (value & 16384) >> 14);
+  digitalWrite(ADDR_15, (value & 32768) >> 15);
 }
 
 void low()
