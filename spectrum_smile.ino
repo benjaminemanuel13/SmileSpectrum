@@ -93,6 +93,9 @@ void setAddress(short value)
   digitalWrite(ADDR_15, (value & 32768) >> 15);
 }
 
+// LOW FUNCTION (12)
+// When this is called, it keeps track of t-states using high and low functions called which
+// Set the modestage so we can catch when the clock goes high/low and what to do on that current t-state.
 void low()
 {
  if(currentmode == (int)IDLE_MODE || !clockrun)
@@ -104,6 +107,7 @@ void low()
   switch(modestage)
   {
     case 0:
+      // First Clock Cycle Low
       digitalWrite(MEMREQ, LOW);
       digitalWrite(RD, LOW);
       modestage = 1;
@@ -111,12 +115,14 @@ void low()
     case 1:
       break;
     case 2:
+      // Second clock cycle system low
       digitalWrite(WAIT, LOW);
       modestage = 3;
       break;
     case 3:
       break;
     case 4:
+      // last clock cycle low (after read)
       digitalWrite(MEMREQ, HIGH);
       digitalWrite(RD, HIGH);
       currentmode = IDLE_MODE;
@@ -154,12 +160,14 @@ void high()
     case 0:
       break;
     case 1:
+      // First clock cycle high
       digitalWrite(WAIT, HIGH);
       modestage = 2;
       break;
     case 2:
       break;
     case 3:
+      // Second cycle hight
       delay(0.2);
       currentdata = readData();
       modestage = 4;
@@ -182,6 +190,7 @@ void high()
  }
 }
 
+// RUN CLOCK FUNCTION (responds to High and Low levels of CLOCK to CALL low() and high() functions (11)
 void runClock()
 {
   clockrun = true;
@@ -233,8 +242,10 @@ void runClock()
   }
 }
 
+// THIS IS CALLED (6)
 void doRead(short address)
 {
+  // SET DATA PINS AS INPUT (7)
   pinMode(DATA_0, INPUT);
   pinMode(DATA_1, INPUT);
   pinMode(DATA_2, INPUT);
@@ -243,12 +254,16 @@ void doRead(short address)
   pinMode(DATA_5, INPUT);
   pinMode(DATA_6, INPUT);
   pinMode(DATA_7, INPUT);
-  
+
+  // SET CURRENT MODE TO READ_MODE (8)
   currentmode = READ_MODE;
+  // SET STAGE TO 0 (9)
   modestage = 0;
 
+  // CALL SET ADDRESS FUNCTION(9)
   setAddress(address);
 
+  // START THE CLOCK LOOP (10)
   runClock();
 }
 
@@ -261,13 +276,17 @@ void doWrite(short address, char data)
 {
 }
 
+//START HERE (1)
 void setup() {
+  //SET REQUEST PINS AS OUTPUT (2)
   pinMode(MEMREQ, OUTPUT);
   pinMode(IORQ, OUTPUT);
   pinMode(RD, OUTPUT);
   pinMode(WR, OUTPUT);
   pinMode(WAIT, OUTPUT);
 
+
+  //SET REQUEST PINS TO HIGH (3)
   digitalWrite(MEMREQ, HIGH);
   digitalWrite(IORQ, HIGH);
   digitalWrite(RD, HIGH);
@@ -276,7 +295,10 @@ void setup() {
 }
 
 void loop() {
+  // AFTER SETUP, THIS FUNCTION KICKS IN (4)
   delay(2000);
+
+  // CALL READ FUNCTION (5)
   doRead(0x8000); //32768
 
   if(currentdata == 0x12) //18
