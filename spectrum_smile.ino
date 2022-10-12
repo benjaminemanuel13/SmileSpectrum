@@ -1,28 +1,28 @@
-#define ADDR_1 2
-#define ADDR_2 3
-#define ADDR_3 4
-#define ADDR_4 5
-#define ADDR_5 6
-#define ADDR_6 7
-#define ADDR_7 8
-#define ADDR_8 9
-#define ADDR_9 10
-#define ADDR_10 11
-#define ADDR_11 12
-#define ADDR_12 13
-#define ADDR_13 22
-#define ADDR_14 24
-#define ADDR_15 26
-#define ADDR_16 28
+#define ADDR_0 2
+#define ADDR_1 3
+#define ADDR_2 4
+#define ADDR_3 5
+#define ADDR_4 6
+#define ADDR_5 7
+#define ADDR_6 8
+#define ADDR_7 9
+#define ADDR_8 10
+#define ADDR_9 11
+#define ADDR_10 12
+#define ADDR_11 13
+#define ADDR_12 22
+#define ADDR_13 24
+#define ADDR_14 26
+#define ADDR_15 28
 
-#define DATA_1 30
-#define DATA_2 32
-#define DATA_3 34
-#define DATA_4 36
-#define DATA_5 38
-#define DATA_6 40
-#define DATA_7 42
-#define DATA_8 44
+#define DATA_0 30
+#define DATA_1 32
+#define DATA_2 34
+#define DATA_3 36
+#define DATA_4 38
+#define DATA_5 40
+#define DATA_6 42
+#define DATA_7 44
 
 #define CLOCK 31
 #define IORQ 33
@@ -49,48 +49,48 @@ char currentdata = 0;
 char readData()
 {
   char res = 0;
-  res += digitalRead(DATA_1) ? 1 : 0;
-  res += digitalRead(DATA_2) ? 2 : 0;
-  res += digitalRead(DATA_3) ? 4 : 0;
-  res += digitalRead(DATA_4) ? 8 : 0;
-  res += digitalRead(DATA_5) ? 16 : 0;
-  res += digitalRead(DATA_6) ? 32 : 0;
-  res += digitalRead(DATA_7) ? 64 : 0;
-  res += digitalRead(DATA_8) ? 128 : 0;
+  res += digitalRead(DATA_0) ? 1 : 0;
+  res += digitalRead(DATA_1) ? 2 : 0;
+  res += digitalRead(DATA_2) ? 4 : 0;
+  res += digitalRead(DATA_3) ? 8 : 0;
+  res += digitalRead(DATA_4) ? 16 : 0;
+  res += digitalRead(DATA_5) ? 32 : 0;
+  res += digitalRead(DATA_6) ? 64 : 0;
+  res += digitalRead(DATA_7) ? 128 : 0;
 
   return res;
 }
 
 void writeData(char value)
 {
-  digitalWrite(DATA_1, value & 1);
-  digitalWrite(DATA_2, value & 2);
-  digitalWrite(DATA_3, value & 4);
-  digitalWrite(DATA_4, value & 8);
-  digitalWrite(DATA_5, value & 16);
-  digitalWrite(DATA_6, value & 32);
-  digitalWrite(DATA_7, value & 64);
-  digitalWrite(DATA_8, value & 128);
+  digitalWrite(DATA_0, value & 1);
+  digitalWrite(DATA_1, value & 2);
+  digitalWrite(DATA_2, value & 4);
+  digitalWrite(DATA_3, value & 8);
+  digitalWrite(DATA_4, value & 16);
+  digitalWrite(DATA_5, value & 32);
+  digitalWrite(DATA_6, value & 64);
+  digitalWrite(DATA_7, value & 128);
 }
 
 void setAddress(short value)
 {
-  digitalWrite(ADDR_1, value & 1);
-  digitalWrite(ADDR_2, value & 2);
-  digitalWrite(ADDR_3, value & 4);
-  digitalWrite(ADDR_4, value & 8);
-  digitalWrite(ADDR_5, value & 16);
-  digitalWrite(ADDR_6, value & 32);
-  digitalWrite(ADDR_7, value & 64);
-  digitalWrite(ADDR_8, value & 128);
-  digitalWrite(ADDR_9, value & 256);
-  digitalWrite(ADDR_10, value & 512);
-  digitalWrite(ADDR_11, value & 1024);
-  digitalWrite(ADDR_12, value & 2048);
-  digitalWrite(ADDR_13, value & 4096);
-  digitalWrite(ADDR_14, value & 8192);
-  digitalWrite(ADDR_15, value & 16384);
-  digitalWrite(ADDR_16, value & 32768);
+  digitalWrite(ADDR_0, value & 1);
+  digitalWrite(ADDR_1, value & 2);
+  digitalWrite(ADDR_2, value & 4);
+  digitalWrite(ADDR_3, value & 8);
+  digitalWrite(ADDR_4, value & 16);
+  digitalWrite(ADDR_5, value & 32);
+  digitalWrite(ADDR_6, value & 64);
+  digitalWrite(ADDR_7, value & 128);
+  digitalWrite(ADDR_8, value & 256);
+  digitalWrite(ADDR_9, value & 512);
+  digitalWrite(ADDR_10, value & 1024);
+  digitalWrite(ADDR_11, value & 2048);
+  digitalWrite(ADDR_12, value & 4096);
+  digitalWrite(ADDR_13, value & 8192);
+  digitalWrite(ADDR_14, value & 16384);
+  digitalWrite(ADDR_15, value & 32768);
 }
 
 void low()
@@ -235,6 +235,7 @@ void runClock()
 
 void doRead(short address)
 {
+  pinMode(DATA_0, INPUT);
   pinMode(DATA_1, INPUT);
   pinMode(DATA_2, INPUT);
   pinMode(DATA_3, INPUT);
@@ -242,7 +243,6 @@ void doRead(short address)
   pinMode(DATA_5, INPUT);
   pinMode(DATA_6, INPUT);
   pinMode(DATA_7, INPUT);
-  pinMode(DATA_8, INPUT);
   
   currentmode = READ_MODE;
   modestage = 0;
