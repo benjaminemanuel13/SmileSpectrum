@@ -284,7 +284,8 @@ void setup() {
   pinMode(RD, OUTPUT);
   pinMode(WR, OUTPUT);
   pinMode(WAIT, OUTPUT);
-
+  
+  pinMode(CLOCK, INPUT);
 
   //SET REQUEST PINS TO HIGH (3)
   digitalWrite(MEMREQ, HIGH);
